@@ -5,29 +5,29 @@ from datetime import datetime as dt
 
 end_time = dt(2022,5,5,15)     # (2022,may,05,3pm)
 
-# change the 'end time' above for sites being blocked as per your requirement in the formal given below:
+# Change the 'end time' above for sites being blocked as per your requirement in the format given below:
 # end_time = dt(year, month, day, hour, minutes, seconds)
-# put the 'hour' in 24 hour clock
-# hour, minutes and seconds are optional
+# Put the 'Hour' in 24 hour clock
+# Hour, Minutes and Seconds are optional
 
 
 path = r'C:\Windows\System32\drivers\etc\hosts' # for windows
-# if you are on Mac/Linux, then use:
+# If you are on Mac/Linux, then use this instead of above 'path' object:
 # path = '/etc/hosts'
 
 redirect = '127.0.0.1'
 
 weblist = ['www.site1.com' , 'site1.com', 'www.site2.in' , 'site2.in']
-# add any number of sites in the given format
-# use any domain - .com / .in / .tk / .ml / .co / .me  etc.
+# Add any number of sites in the given format above
+# Use any domain - .com / .in / .tk / .ml / .co / .me  etc.
 
 
  
 # --------------------DO NOT CHANGE ANYTHING AFTER THIS---------------------- #
 
-# main code
+# Main Code
 def block_the_sites():
-    if dt.now() < end_time: #running until the given time
+    if dt.now() < end_time: # Running until the given time
         with open(path,'r+') as hostsfile:
             cont_hosts = hostsfile.read()
             for site in weblist:
@@ -37,17 +37,17 @@ def block_the_sites():
                     pass
         print('Hurray , Sites have been blocked!!')
 
-    else:
+    else: # To unblock the sites after the given time is over
         with open(path,'r+') as hostsfile:
             cont_hosts = hostsfile.readlines()
             hostsfile.seek(0)
             for line in cont_hosts:
                 if not any(site in line for site in weblist):
                     hostsfile.write(line)
-            hostsfile.truncate()
+            hostsfile.truncate() # Deleting the added lines in the file to block sites
 
         print('Hurray, sites have been unblocked!!')
 
 if __name__ == '__main__':
-    block_the_sites() #calling the function
+    block_the_sites() # Calling the function out to block the sites
 
