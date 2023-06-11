@@ -44,7 +44,7 @@ def block_the_sites():
             for line in cont_hosts:
                 if not any(site in line for site in weblist):
                     hostsfile.write(line)
-            hostsfile.truncate() # Deleting the added lines in the file to block sites
+            hostsfile.truncate() # Deleting the added lines in the file to unblock sites
 
         print('Hurray, sites have been unblocked!!')
 
